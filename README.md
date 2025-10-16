@@ -1,4 +1,4 @@
-# Expense Tracker
+# advance-expense-tracker
 
 A web application for tracking personal expenses and income. This application allows users to manage their finances by providing a clear overview of their spending and earnings.
 
@@ -31,41 +31,51 @@ A web application for tracking personal expenses and income. This application al
 
 ## Setup and Installation
 
-1.  **Clone the repository**:
+1. **Clone the repository**:
+
     ```bash
-    git clone https://github.com/your-username/expense-tracker.git
-    cd expense-tracker
+    git clone https://github.com/devhimal/advance-expense-tracker.git
+    cd advance-expense-tracker
+
     ```
 
-2.  **Create and activate a virtual environment**:
+2. **Create and activate a virtual environment**:
+
     ```bash
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-3.  **Install the dependencies**:
+3. **Install the dependencies**:
+
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Create a `.env` file**:
+4. **Create a `.env` file**:
     Create a `.env` file in the root directory and add the following environment variables:
+
     ```
     SECRET_KEY='a_very_secret_key'
     DATABASE_URL='sqlite:///instance/app.db'
     ```
 
-5.  **Run database migrations**:
+5. **Run database migrations**:
+
     ```bash
     flask db upgrade
     ```
 
-6.  **Run the application**:
+6. **Run the application**:
+
     - **For development**:
+
       ```bash
       python run.py
       ```
+
     - **For production**:
+
       ```bash
       gunicorn run:app
       ```
@@ -75,7 +85,7 @@ A web application for tracking personal expenses and income. This application al
 ## Project Structure
 
 ```
-/expense-tracker
+/advance-expense-tracker
 ├── app/
 │   ├── __init__.py         # Initializes the Flask application and extensions
 │   ├── forms/              # WTForms definitions
@@ -93,6 +103,4 @@ A web application for tracking personal expenses and income. This application al
 ├── procfile                # For deployment (e.g., Heroku)
 ├── requirements.txt        # Python dependencies
 ├── run.py                  # Application entry point
-└── README.md
-```
-# advance-expense-tracker
+
