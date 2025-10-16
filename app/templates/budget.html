@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+  <h1>Set Your Budgets</h1>
+  <form method="post">
+    <div class="form-group">
+      <label for="food">Food</label>
+      <input type="number" step="0.01" name="food" id="food" value="{{ budget.food }}" required>
+    </div>
+    <div class="form-group">
+      <label for="transport">Transport</label>
+      <input type="number" step="0.01" name="transport" id="transport" value="{{ budget.transport }}" required>
+    </div>
+    <div class="form-group">
+      <label for="study">Study</label>
+      <input type="number" step="0.01" name="study" id="study" value="{{ budget.study }}" required>
+    </div>
+    <div class="form-group">
+      <label for="entertainment">Entertainment</label>
+      <input type="number" step="0.01" name="entertainment" id="entertainment" value="{{ budget.entertainment }}" required>
+    </div>
+    <div class="form-group">
+      <label for="others">Others</label>
+      <input type="number" step="0.01" name="others" id="others" value="{{ budget.others }}" required>
+    </div>
+    <button type="submit">Update Budget</button>
+  </form>
+</div>
+{% endblock %}

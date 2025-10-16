@@ -1,0 +1,130 @@
+{% extends "base.html" %} {% block content %}
+<h1>Dashboard</h1>
+<div class="filters">
+  <form method="get" action="{{ url_for('dashboard.index') }}">
+    <div class="form-group">
+      <label for="period">Period:</label>
+      <select name="period" id="period" onchange="this.form.submit()">
+        <option value="daily" {% if period == "daily" %}selected{% endif %}>
+          Daily
+        </option>
+        <option value="weekly" {% if period == "weekly" %}selected{% endif %}>
+          Weekly
+        </option>
+        <option value="monthly" {% if period == "monthly" %}selected{% endif %}>
+          Monthly
+        </option>
+        <option value="yearly" {% if period == "yearly" %}selected{% endif %}>
+          Yearly
+        </option>
+        <option value="all" {% if period == "all" %}selected{% endif %}>
+          All
+        </option>
+      </select>
+    </div>
+  </form>
+</div>
+
+<div class="summary-cards">
+  <div class="card">
+    <h3>Total Income</h3>
+    <strong>{{ total_income }}</strong>
+  </div>
+  <div class="card">
+    <h3>Total Expense</h3>
+    <strong>{{ total_expense }}</strong>
+  </div>
+  <div class="card">
+    <h3>Balance</h3>
+    <strong>{{ balance }}</strong>
+  </div>
+</div>
+
+<div>
+  <div>
+    <h2>Top 3 Expense Categories</h2>
+    <img src="{{ top_expenses_chart_data }}" alt="Top Expenses Chart" />
+  </div>
+  <div>
+    <h2>Category Budgets and Spending</h2>
+    {% if category_summary %}
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Budget</th>
+            <th>Spent</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in category_summary %}
+            <tr>
+              <td>{{ item.category }}</td>
+              <td>{{ item.budget }}</td>
+              <td>{{ item.spent }}</td>
+              <td {% if item.balance < 0 %}class="danger-text"{% endif %}>{{ item.balance }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No budget data available.</p>
+    {% endif %}
+  </div>
+</div>
+
+<h2>Over Budget Categories Chart</h2>
+<img src="{{ over_budget_chart_data }}" alt="Over Budget Chart" />
+
+<h2>Expense Category Distribution</h2>
+<img src="{{ expense_chart_data }}" alt="Category chart" />
+
+<h2>Expense Category Distribution (Table)</h2>
+{% if actual_expenses_by_category %}
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Amount Spent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category, amount in actual_expenses_by_category.items() %}
+        <tr>
+          <td>{{ category }}</td>
+          <td>{{ amount }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No expenses for this period.</p>
+{% endif %}
+
+<h2>Income Sources</h2>
+<img src="{{ income_chart_data }}" alt="Income chart" />
+
+<h2>Income vs Expense Trend</h2>
+<img src="{{ trends_chart_data }}" alt="Trends chart" />
+
+<h2>Expense Trends (Bar)</h2>
+<img src="{{ expense_trends_bar_chart_data }}" alt="Expense Trends chart" />
+
+<h2>Daily totals (selected period)</h2>
+{% if timeseries %}
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+  </tr>
+  {% for row in timeseries %}
+  <tr>
+    <td>{{ row.date }}</td>
+    <td>{{ row.amount }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No transactions for this period.</p>
+{% endif %} {% endblock %}
